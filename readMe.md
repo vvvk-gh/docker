@@ -106,3 +106,12 @@ uname -r                                # gives you the name of the kernal
 # docker is just a process on your os it wont be having a new kernal like VM's
 
 ```
+
+`Task 1` : Just like alpine run centos in a shell
+
+```cmd
+    sudo dockerd                            # starting docker deamon if it's stopped already.
+    sudo docker container run -it centos
+    cat /etc/os-release                     # to verify whether we are inside centos
+    uname -r                                # to verify kernal (same as original)
+```
