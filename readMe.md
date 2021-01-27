@@ -115,3 +115,77 @@ uname -r                                # gives you the name of the kernal
     cat /etc/os-release                     # to verify whether we are inside centos
     uname -r                                # to verify kernal (same as original)
 ```
+
+---
+
+## New containers , Existing Containers
+
+Everytime you use a command
+
+```
+docker container run <image>
+```
+
+it create a new container but to use the existing one using `attach`.
+Let's check how
+
+### ls
+
+```
+sudo docker container ls       # lists all the active container
+sudo docker container ls -a    # lists all the active and disactive container
+```
+
+### start , stop
+
+```
+docker container start <container_name>   # starts the container
+docker container stop <container_name>    # stops the container
+```
+
+### Terminate container , attach , detach
+
+Everytime you press `ctrl+d` the container terminates
+
+insider : when ever you press `ctrl+d` it terminates the container as shell the main process of the container, the shell will also terminate along with it.
+
+```terminal
+    sudo container run -it alpine sh
+    pressed `ctrl+d`
+    sudo docker container ls
+    will output nothing as we terminated the container
+```
+
+Now try running a container and press `ctrl+p` and `ctrl+q`
+
+```
+sudo docker container run -it alpine sh
+
+pressed `ctrl+p` and `ctrl+q`
+
+sudo docker container ls
+
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+34295b155e1c   alpine    "sh"      8 minutes ago   Up 2 seconds             sharp_kalam
+
+```
+
+when you click `ctrl+p` and `ctrl+q` the container is just detached and your cursor will be moved to your local machine.
+
+but the container runs in the background
+
+you can reattach to it using below
+
+```
+sudo docker attach <container_name>
+```
+
+what if you want to use same container that is already terminated and you dont want to create new one ?
+
+```
+sudo docker container ls -a                     # list of active and exited
+sudo docker start <container_name>              # select the container_name that you want to use
+sudo docker attach <container_name>             # attaches to the previous container
+
+# verify with hostname (before and after hostname should be same)
+```
