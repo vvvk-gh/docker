@@ -50,7 +50,59 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-sudo docker run hello-world
+sudo dockerd        # it's docker deamon and it should be always running in a seperate tab.
 
+sudo docker version  # to verify installation
+```
+
+### Getting Started
+
+1. Running a container
+
+```cmd
+sudo docker container run hello-world
+```
+
+output :
+
+```cmd
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+```
+
+#### What happend internally when you run tha above command ?
+
+```
+    sudo docker container run <docker-image-name>
+```
+
+When ever you try to run above it checks for the docker-image containing a matching name locally, if not searches in the docker repository online (Docker Hub) and downloads it and forms a container and executes it.
+
+### Starting a shell
+
+```bash
+# alpine is very minimal linux distribution (few MB in size) best for docker
+# you want to execute inside the container we use word shell 'sh'
+# whenever you start an interactive program like shell inside a container we need to use flags "-it"
+
+ ❌ sudo docker container run alpine sh      # wont work
+
+ ✅ sudo docker container run -it alpine sh
+
+cat /etc/os-release                     # to check whether we are inside alpine
+uname -r                                # gives you the name of the kernal
+
+# it will same as your original kernal even though you are inside a container.
+# docker is just a process on your os it wont be having a new kernal like VM's
 
 ```
